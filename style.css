@@ -1,0 +1,392 @@
+/* Variables CSS */
+:root {
+    --primary-color: #4a86e8;
+    --secondary-color: #34495e;
+    --background-color: #f5f7fa;
+    --player-bg: #ffffff;
+    --text-color: #2c3e50;
+    --progress-color: #4a86e8;
+    --progress-bg: #e0e6ed;
+    --visualizer-color: #4a86e8;
+    --playlist-bg: #ffffff;
+    --hover-color: #3498db;
+    --box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    --transition-fast: all 0.2s ease;
+    --transition-medium: all 0.3s ease;
+}
+
+/* Reset et styles de base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.audio-player {
+    width: 100%;
+    max-width: 400px;
+    background-color: var(--player-bg);
+    border-radius: 20px;
+    box-shadow: var(--box-shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+/* En-tête du lecteur */
+.player-header {
+    padding: 20px;
+    text-align: center;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+}
+
+.player-header h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+/* Container principal */
+.player-container {
+    padding: 20px;
+}
+
+/* Visualiseur */
+.player-visualizer {
+    display: flex;
+    justify-content: center;
+    height: 80px;
+    margin-bottom: 20px;
+}
+
+.wave-visualizer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    gap: 5px;
+}
+
+.wave-bar {
+    width: 6px;
+    height: 30%;
+    background-color: var(--visualizer-color);
+    border-radius: 3px;
+    transition: height 0.2s ease;
+}
+
+/* Animation de base pour les barres du visualiseur */
+@keyframes waveAnimation {
+    0% { height: 10%; }
+    50% { height: 60%; }
+    100% { height: 10%; }
+}
+
+/* Applique des délais différents pour chaque barre */
+.wave-bar:nth-child(1) { animation: waveAnimation 1.2s ease-in-out 0s infinite; }
+.wave-bar:nth-child(2) { animation: waveAnimation 1.4s ease-in-out 0.1s infinite; }
+.wave-bar:nth-child(3) { animation: waveAnimation 1s ease-in-out 0.2s infinite; }
+.wave-bar:nth-child(4) { animation: waveAnimation 1.6s ease-in-out 0.3s infinite; }
+.wave-bar:nth-child(5) { animation: waveAnimation 1.1s ease-in-out 0.4s infinite; }
+.wave-bar:nth-child(6) { animation: waveAnimation 1.3s ease-in-out 0.5s infinite; }
+.wave-bar:nth-child(7) { animation: waveAnimation 1.5s ease-in-out 0.4s infinite; }
+.wave-bar:nth-child(8) { animation: waveAnimation 1.2s ease-in-out 0.3s infinite; }
+.wave-bar:nth-child(9) { animation: waveAnimation 1.4s ease-in-out 0.2s infinite; }
+.wave-bar:nth-child(10) { animation: waveAnimation 1.1s ease-in-out 0.1s infinite; }
+
+/* Détails de la chanson */
+.song-details {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.song-title {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+    color: var(--text-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.song-artist {
+    font-size: 1rem;
+    color: #757575;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Zone de progression */
+.progress-area {
+    margin-bottom: 25px;
+}
+
+.progress-bar {
+    height: 6px;
+    width: 100%;
+    background-color: var(--progress-bg);
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
+}
+
+.progress {
+    height: 100%;
+    width: 0%;
+    background-color: var(--progress-color);
+    border-radius: 10px;
+    position: relative;
+    transition: width 0.1s linear;
+}
+
+.progress::after {
+    content: '';
+    position: absolute;
+    right: -8px;
+    top: -4px;
+    height: 14px;
+    width: 14px;
+    background-color: var(--progress-color);
+    border-radius: 50%;
+    transform: scale(0);
+    transition: transform 0.2s ease;
+}
+
+.progress-bar:hover .progress::after {
+    transform: scale(1);
+}
+
+.time-counter {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    font-size: 0.85rem;
+    color: #757575;
+}
+
+/* Zone de contrôle */
+.controls-area {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.main-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.control-btn {
+    cursor: pointer;
+    transition: var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.control-btn:hover {
+    color: var(--hover-color);
+}
+
+.play-pause-btn {
+    height: 60px;
+    width: 60px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-fast);
+}
+
+.play-pause-btn:hover {
+    transform: scale(1.05);
+    background-color: var(--hover-color);
+    color: white;
+}
+
+.play-pause-btn .material-symbols-rounded {
+    font-size: 2.5rem;
+}
+
+.volume-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+}
+
+.volume-slider {
+    width: 0;
+    overflow: hidden;
+    transition: var(--transition-medium);
+}
+
+.volume-container:hover .volume-slider {
+    width: 100px;
+}
+
+.volume-bar {
+    height: 4px;
+    width: 100px;
+    background-color: var(--progress-bg);
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
+}
+
+.volume-progress {
+    height: 100%;
+    width: 80%;
+    background-color: var(--progress-color);
+    border-radius: 10px;
+    transition: width 0.1s linear;
+}
+
+/* Playlist */
+.playlist {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--playlist-bg);
+    transform: translateY(100%);
+    transition: var(--transition-medium);
+    z-index: 10;
+    border-radius: 20px;
+}
+
+.playlist.show {
+    transform: translateY(0);
+}
+
+.playlist-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+}
+
+.playlist-header h3 {
+    font-size: 1.5rem;
+}
+
+.close-playlist {
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.close-playlist:hover {
+    transform: scale(1.1);
+}
+
+.playlist-songs {
+    height: calc(100% - 70px);
+    overflow-y: auto;
+    padding: 10px 20px;
+    list-style: none;
+}
+
+.playlist-song {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--progress-bg);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.playlist-song:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.playlist-song.playing {
+    color: var(--primary-color);
+    background-color: rgba(74, 134, 232, 0.1);
+}
+
+.song-info {
+    flex: 1;
+    overflow: hidden;
+}
+
+.song-info h4 {
+    font-size: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.song-info p {
+    font-size: 0.85rem;
+    color: #757575;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.song-duration {
+    font-size: 0.85rem;
+    color: #757575;
+}
+
+/* Icônes Material Symbols */
+.material-symbols-rounded {
+    font-size: 1.8rem;
+    user-select: none;
+}
+
+/* Styles pour les états actifs */
+.active {
+    color: var(--primary-color);
+}
+
+/* Media Queries pour la responsivité */
+@media screen and (max-width: 480px) {
+    .audio-player {
+        max-width: 95%;
+        border-radius: 15px;
+    }
+    
+    .player-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .song-title {
+        font-size: 1.3rem;
+    }
+    
+    .main-controls {
+        gap: 15px;
+    }
+    
+    .play-pause-btn {
+        height: 50px;
+        width: 50px;
+    }
+    
+    .play-pause-btn .material-symbols-rounded {
+        font-size: 2rem;
+    }
+    
+    .material-symbols-rounded {
+        font-size: 1.5rem;
+    }
+}
